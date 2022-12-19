@@ -8,7 +8,6 @@ local ExtendAPI = {} do
     function ExtendAPI.Object()
         local proxy = newproxy(true)
         local meta = getmetatable(proxy)
-        setmetatable(meta, {__mode = 'kv'})
         return meta
     end
 
