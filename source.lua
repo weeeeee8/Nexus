@@ -11,7 +11,7 @@ local function makeGlobal(key, value, overrideGlobal)
     if not hasGlobal(key) or overrideGlobal then
         env[key] = value
     else
-        error(string.format('Global "%s" is already defined'), 2)
+        error(string.format('Global "%s" is already defined', key), 2)
     end
 end
 
