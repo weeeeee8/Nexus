@@ -17,6 +17,16 @@ end
 
 local function removeGlobal(key)
     if hasGlobal(key) then
+        local global = env[key]
+        if typeof(global) == "function" then
+            global()
+        elseif type(global) == "table" then
+            if global.Destroy then
+                global:Destroy()
+            end
+        elseif typeof(global) == "RBXScriptConnection" then
+            global:Disconnect()
+        end
         env[key] = nil
     end
 end
