@@ -139,7 +139,7 @@ return {
                                     end
 
                                     if shouldAutoExecute then
-                                        queue_on_teleport('loadstring(game:HttpGet(string.format("https://raw.githubusercontent.com/%s/Nexus/%s/source.lua", __USER__, __BUILD__)), "Nexus")()')
+                                        queue_on_teleport(string.format('loadstring(game:HttpGet(string.format("https://raw.githubusercontent.com/%s/Nexus/%s/source.lua", %s, %s)), "Nexus")()', __USER__, __BUILD__))
                                     end
                                     TeleportService:TeleportToPlaceInstance(game.PlaceId, id, Players.LocalPlayer)
                                     local onTeleportFailed; onTeleportFailed = Players.LocalPlayer.OnTeleport:Connect(function(state)
@@ -163,6 +163,31 @@ return {
                         task.wait(1)
                     end
                 end
+            end)
+        end)
+        
+        schedule(function()
+            local shouldAutoExecute = false
+            local section = Tab:Section("Rejoining Options", "Right")
+
+            section:Checkbox({
+                Title = "Re-execute script hub after teleporting?",
+                Description = "will execute the script hub again after serverhopping",
+                Default = true,
+                --Flag = "JoiningOptionsCheckbox1"
+            }, function(toggled)
+                shouldAutoExecute = toggled
+            end)
+
+            section:Button({
+                Title = "Rejoin server",
+                Description = "Rejoins the same server using game.PlaceId",
+                ButtonName = "Rejoin now!"
+            }, function()
+                if shouldAutoExecute then
+                    queue_on_teleport(string.format('loadstring(game:HttpGet(string.format("https://raw.githubusercontent.com/%s/Nexus/%s/source.lua", %s, %s)), "Nexus")()', __USER__, __BUILD__))
+                end
+                TeleportService:Teleport(game.PlaceId, Players.LocalPlayer)
             end)
         end)
 
