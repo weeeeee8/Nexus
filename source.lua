@@ -43,7 +43,7 @@ makeGlobal('__NEXUS_FILE_CONSTANTS__', {
     userdata_path = __NEXUS_FILE_PATH__ .. '/userdata'
 })
 
-local import = loadstring(game:HttpGet(string.format('https://raw.githubusercontent.com/%s/Nexus/%s/src/util/Import.lua', USER, BUILD)), 'Import.lua')()
+local import = loadstring(game:HttpGet(string.format('https://raw.githubusercontent.com/%s/Nexus/%s/src/env/util/Import.lua', USER, BUILD)), 'Import.lua')()
 
 makeGlobal('import', import)
 
