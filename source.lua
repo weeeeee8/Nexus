@@ -47,7 +47,6 @@ local import = loadstring(game:HttpGet(string.format('https://raw.githubusercont
 
 makeGlobal('import', import)
 
-import:CreateDirectory('env') -- we could just remove this as 'env/lib' also create 'env' but hehe
 import:CreateDirectory('env/lib')
 import:CreateDirectory('env/util')
 import:CreateDirectory('scripts')
