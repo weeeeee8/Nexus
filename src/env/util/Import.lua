@@ -52,7 +52,7 @@ local Import = setmetatable({
 
             local target = ImportDirectories
             repeat
-                print(target, indexInPath, target[indexInPath])
+                print(target, indexInPath, target[directory[indexInPath]])
                 target = target[directory[indexInPath]]
                 indexInPath += 1
             until indexInPath - 1 == #directory
