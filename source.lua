@@ -46,7 +46,7 @@ makeGlobal('__NEXUS_FILE_CONSTANTS__', {
 local import = loadstring(game:HttpGet(string.format('https://raw.githubusercontent.com/%s/Nexus/%s/src/env/util/Import.lua', USER, BUILD)), 'Import.lua')()
 
 makeGlobal('import', import)
-
+import:CreateDirectory('env')
 import:CreateDirectory('env/lib')
 import:CreateDirectory('env/util')
 import:CreateDirectory('scripts')

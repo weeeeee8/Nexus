@@ -29,7 +29,14 @@ return {
             section:Slider({
                 Title = "Set flight speed",
                 Description = "",
-            })
+                Min = FLIGHT_SPEED_LIMIT.Min,
+                Max = FLIGHT_SPEED_LIMIT.Max,
+                Default = FLIGHT_SPEED_LIMIT.Min,
+            }, function(value)
+                flightSpeed = value
+            end)
+
+            
         end)
 
         schedule:sequence()
