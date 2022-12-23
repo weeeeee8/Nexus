@@ -58,7 +58,7 @@ local Import = setmetatable({
             
             local src = target[fileName]
             if not src then
-                src = loadstring(game:HttpGet(SOURCE .. table.concat(directory, PATH_SEPERATOR) .. "/" .. fileName .. ".lua"), fileName .. ".lua")()
+                src = loadstring(game:HttpGet(SOURCE .. table.concat(directory, PATH_SEPERATOR) .. "/" .. fileName), fileName)()
                 target[fileName] = src
             end
             return src

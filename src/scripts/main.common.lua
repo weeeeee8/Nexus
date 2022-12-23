@@ -1,7 +1,7 @@
 
 return {
     Default = function(category)
-        local Utility = import('env/util/Utility')
+        local Utility = import('env/util/Utility.lua')
         local tab = category:Button("Common")
 
         local schedule = Utility.Schedule()
@@ -36,7 +36,7 @@ return {
                 flightSpeed = value
             end)
 
-            
+
         end)
 
         schedule:sequence()

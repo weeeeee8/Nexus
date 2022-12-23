@@ -1,6 +1,6 @@
 return {
     Default = function()
-        local HydraLibrary = import('env/lib/Hydra')
+        local HydraLibrary = import('env/lib/Hydra.lua')
         
         local __version__ = import('env/ver.txt')
         extern("NEXUS_VERSION", __version__, true)
@@ -11,11 +11,11 @@ return {
         xpcall(function()
             local function importScriptFromGame(id)
                 return ({
-                    [224422602] = 'ebg.init'
+                    [224422602] = 'ebg.init.lua'
                 })[id]
             end
 
-            import('scripts/main.init').Default()
+            import('scripts/main.init.lua').Default()
             import('scripts/' .. importScriptFromGame(game.GameId)).Default()
         end, function(...)
             warn('[SCRIPT IMPORT ERROR] %s', ...)

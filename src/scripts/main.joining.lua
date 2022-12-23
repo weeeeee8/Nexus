@@ -4,7 +4,7 @@ local TeleportService = game:GetService("TeleportService")
 
 return {
     Default = function(category)
-        local Utility = import('env/util/Utility')
+        local Utility = import('env/util/Utility.lua')
         local Tab = category:Button('Joining Options')
 
         local schedule = Utility.Schedule()
