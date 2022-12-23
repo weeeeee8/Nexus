@@ -172,7 +172,7 @@ return {
 
             section:Checkbox({
                 Title = "Re-execute script hub after teleporting?",
-                Description = "will execute the script hub again after serverhopping",
+                Description = "",
                 Default = true,
                 --Flag = "JoiningOptionsCheckbox1"
             }, function(toggled)

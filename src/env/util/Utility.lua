@@ -209,6 +209,10 @@ local HelpfulAPI = {} do
         if player.Character then callback(player.Character) end
         return player.CharacterAdded:Connect(callback)
     end
+
+    function HelpfulAPI.Lerp(a, b, c)
+        return a + (b - a) * c
+    end
 end
 
 local SafeAPI = {} do
