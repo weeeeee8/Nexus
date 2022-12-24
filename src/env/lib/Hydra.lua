@@ -3932,7 +3932,9 @@ function UILibrary.Category:Button(name, icon)
     local contentholder = self.ContentHolder
     local button = objectGenerator.new("CategoryButton")
 
-    button.InnerContent.Image.Image = icon
+    if icon then
+        button.InnerContent.Image.Image = icon
+    end
     button.InnerContent.Title.Text = name
 
     button.Parent = self.contentHolder.Bar2Holder
