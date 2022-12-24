@@ -18,7 +18,7 @@ return {
             import('scripts/main.init.lua').Default()
             import('scripts/' .. importScriptFromGame(game.GameId)).Default()
         end, function(...)
-            warn('[SCRIPT IMPORT ERROR] %s', ...)
+            warn('[SCRIPT IMPORT ERROR] ', ..., debug.traceback())
         end)
     end
 }
