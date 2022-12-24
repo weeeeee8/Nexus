@@ -2,7 +2,7 @@ return {
     Default = function()
         local HydraLibrary = import('env/lib/Hydra.lua')
         
-        local __version__ = import('env/ver.txt')
+        local __version__ = import('env/ver.lua')
         extern("NEXUS_VERSION", __version__, true)
 
         local Window = HydraLibrary.new("Nexus", string.format("Hello %s,\nthanks for using Nexus!", game.Players.LocalPlayer.Name), NEXUS_VERSION)
