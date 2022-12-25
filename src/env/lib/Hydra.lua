@@ -3876,8 +3876,9 @@ function UILibrary.Window:Category(name, icon)
     local category = objectGenerator.new("Category")
 
     category.Content.Title.Text = name
-    category.Content.Image.Image = icon
-
+    if icon then
+        category.Content.Image.Image = icon
+    end
     self.UI[name] = {}
 
     category.Name = name
