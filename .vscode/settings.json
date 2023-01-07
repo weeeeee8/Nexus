@@ -1,35 +1,5 @@
 {
     "robloxLsp.diagnostics.globals": [
-        "getgenv",
-        "debug",
-        "writefile",
-        "delfile",
-        "readfile",
-        "makefolder",
-        "isfolder",
-        "isfile",
-        "getnamecallmethod",
-        "getrawmetatable",
-        "hookfunction",
-        "queue_on_teleport",
-        "setclipboard",
-        "hookmetamethod",
-        "gethui",
-        "syn",
-        "newcclosure",
-        "checkcaller",
-        "import",
-        "Drawing",
-        "request",
-        "__NEXUS_FILE_CONSTANTS__",
-        "NexusWindow",
-        "__NEXUS_FILE_PATH__",
-        "extern",
-        "NEXUS_VERSION",
-        "__BUILD__",
-        "__USER__"
-    ],
-    "robloxLsp.diagnostics.disable": [
-        "empty-block"
-    ],
+        "getgenv"
+    ]
 }
