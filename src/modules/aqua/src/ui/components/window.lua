@@ -2,7 +2,7 @@ local RoactService = GetAquaService('RoactService')
 
 local e, f, r, b = RoactService.Roact.createElement, RoactService.Roact.createFragment, RoactService.Roact.createRef, RoactService.Roact.createBinding
 
-local Window = RoactService.Roact.Component:extend('aqua-internal.window')
+local Window = RoactService.Roact.Component:extend('aqua.window')
 function Window:init()
 end
 

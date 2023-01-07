@@ -73,6 +73,7 @@ return function(initFn)
             reducerTemplate = function(state, action)
                 local newState = state or {
                     WindowShown = true,
+                    Theme = "Dark"
                 }
 
                 if action.type == "HideWindow" then

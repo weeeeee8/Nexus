@@ -2,14 +2,14 @@ local RoactService = GetAquaService('RoactService')
 
 local e, f, r, b = RoactService.Roact.createElement, RoactService.Roact.createFragment, RoactService.Roact.createRef, RoactService.Roact.createBinding
 
-local Container = RoactService.Roact.Component:extend('aqua-internal.container')
+local Container = RoactService.Roact.Component:extend('aqua.container')
 function Container:init()
     self.containerRef = r()
     self.groupTransparency, self.updateGroupTransparency = b(1)
     self.dragPosition, self.updateDragPosition = b(UDim2.fromScale(0.5, 0.5))
-    self.tweenDragPosition = RoactService.Otter.createSingleMotor(0)
-    self.tweenDragPosition:OnStep(function(alpha)
-        self.updateDragPosition(UDim2.fromOffset(0, 0), alpha)
+    self.tweenGroupTransparency = RoactService.Otter.createSingleMotor(0)
+    self.tweenGroupTransparency:onStep(function(a)
+        self.updateGroupTransparency(a)
     end)
 end
 
@@ -31,7 +31,7 @@ function Container:didMount()
             container.MouseMoved:Connect(function(x, y)
                 if can_drag then
                     local delta = Vector2.new(x - y) - drag_start
-                    container.Position = UDim2.new(container_origin.X.Scale, container_origin.X.Offset + delta.X, container_origin.Y.Scale, container_origin.Y.Offset + delta.Y)
+                    self.updateDragPosition(UDim2.new(container_origin.X.Scale, container_origin.X.Offset + delta.X, container_origin.Y.Scale, container_origin.Y.Offset + delta.Y))
                 end
             end)
         end
@@ -43,9 +43,15 @@ function Container:didMount()
 end
 
 function Container:render()
+    if self.props.WindowShown then
+        self.tweenGroupTransparency:setGoal(RoactService.Otter.spring.new(0, {frequency = 4}))
+    else
+        self.tweenGroupTransparency:setGoal(RoactService.Otter.spring.new(1, {frequency = 4}))
+    end
+
     return e('CanvasGroup', {
         [RoactService.Roact.Ref] = self.containerRef,
-        BorderPixelSize = 0,
+        BorderSizePixel = 0,
         BackgroundTransparency = 1,
         GroupTransparency = self.groupTransparency,
         ZIndex = 50,
@@ -54,5 +60,10 @@ function Container:render()
         AnchorPoint = if self.props.ContainerFlexes then (self.props.ContainerFlexedAnchor or Vector2.new(0.5, 0.5)) else (self.props.ContainerAnchor or Vector2.zero)
     })
 end
+
+Container = RoactService.RoactRodux.connect(function(state, props)
+    table.move(state, 1, #state, #props+1, props)
+    return props
+end)(Container)
 
 return Container
