@@ -14,7 +14,7 @@ function RoactRouter:link(route: string, initComponent)
     local index = #self._routes+1
     self._routes[index] = {
         title = route,
-        pageComponent = pageComponent,
+        pageComponent = pageComponent or emptyPageTemplate,
         anchorInfo = anchorInfo,
         reference = index
     }

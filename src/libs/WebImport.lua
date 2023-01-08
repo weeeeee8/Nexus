@@ -18,6 +18,7 @@ return function(assetOrRoute, ...)
         if typeof(src) == "function" then
             src = src(...)
         end
+        print(typeof(src), assert)
         foundObject = src
     end
     importCache[assetOrRoute] = foundObject
