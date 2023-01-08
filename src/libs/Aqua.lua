@@ -30,7 +30,7 @@ do
     end
 
     if not import then
-        local webimportapi = loadstring(game:HttpGet('https://raw.githubusercontent.com/weeeeee8/Nexus/main/src/libs/WebImport.lua'), 'webimportapi')
+        local webimportapi = loadstring(game:HttpGet('https://raw.githubusercontent.com/weeeeee8/Nexus/main/src/libs/WebImport.lua'), 'webimportapi')()
         env.import = webimportapi
     end
 
@@ -59,12 +59,10 @@ do
 end
 
 return function(initFn)
-    print(1)
     if __AQUA_INIT__ then
         console.log('Cannot create a new Aqua window without terminating the old one!')
         return
     end
-    print(2)
     rconsolename('aqua')
     console.log('Initializing Aqua', '@@BROWN@@')
     local igniteManager = import('/modules/aqua/main.lua')

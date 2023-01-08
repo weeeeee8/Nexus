@@ -1,1 +1,1 @@
-return loadstring(game:HttpGet('https://raw.githubusercontent.com/weeeeee8/AquaUI/main/src/libs/Aqua.lua'), 'aqua-ui')
+return loadstring(game:HttpGet('https://raw.githubusercontent.com/weeeeee8/AquaUI/main/src/libs/Aqua.lua'), 'aqua-ui')()
