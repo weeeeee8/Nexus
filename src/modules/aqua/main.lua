@@ -46,5 +46,4 @@ return function()
     }
 
     __GLOBAL__.Aqua = import('/modules/aqua/src/ui/main.lua')
-    print(__GLOBAL__, __GLOBAL__.Aqua)
 end

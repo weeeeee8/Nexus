@@ -67,6 +67,7 @@ return function(initFn)
     console.log('Initializing Aqua', '@@BROWN@@')
     local igniteManager = import('/modules/aqua/main.lua')
     console.log('Aqua has been initialized!', '@@GREEN@@')
+    print(igniteManager)
     igniteManager()
     if initFn then
         console.log('Initializing script caller(s)', '@@BROWN@@')
