@@ -11,17 +11,25 @@ return function(assetOrRoute, ...)
     end
 
     local foundObject
-    if type(assetOrRoute) == "number" then
-        foundObject = game:GetObjects(assetOrRoute)[1]
-    else
-        local src = loadstring(game:HttpGet(url .. assetOrRoute))()
-        if typeof(src) == "function" then
-            src = src(...)
+    local success, err = pcall(function(...)
+        if assetOrRoute:find("rbxassetid://") then
+            foundObject = game:GetObjects(assetOrRoute)[1]
+        else
+            local src = loadstring(game:HttpGet(url .. assetOrRoute))()
+            if typeof(src) == "function" then
+                src = src(...)
+            end
+            print(typeof(src), assert)
+            foundObject = src
         end
-        print(typeof(src), assert)
-        foundObject = src
-    end
-    importCache[assetOrRoute] = foundObject
+    end, ...)
 
-    return foundObject
+    if success then
+        importCache[assetOrRoute] = foundObject
+
+        return foundObject
+    else
+        console.log(err, "@@RED@@")
+        return {}
+    end
 end
