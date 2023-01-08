@@ -15,19 +15,9 @@ if __AQUA_INIT__ then
     __AQUA_INIT__ = nil
 end
 
-do
-    local env = assert(getgenv, 'current executor does not support "getgenv" method.')()
-    if not __GLOBAL__ then
-        env.__GLOBAL__ = setmetatable({}, {
-            __index = function(_,k)
-                return env[k]
-            end,
-            __newindex = function(_, k, v)
-                env[k] = v
-            end
-        })
-    end
+local env = assert(getgenv, 'current executor does not support "getgenv" method.')()
 
+do
     if not import then
         local webimportapi = loadstring(game:HttpGet('https://raw.githubusercontent.com/weeeeee8/Nexus/main/src/libs/WebImport.lua'), 'webimportapi')
         env.import = webimportapi
@@ -92,7 +82,7 @@ return function(initFn)
             return newState
         end
 
-        __GLOBAL__.__AQUA_STORE__ = GetAquaService('RoactService').Rodux.Store.new(reducer)
+        env.__AQUA_STORE__ = GetAquaService('RoactService').Rodux.Store.new(reducer)
         console.log('Script caller(s) has been initialized!', '@@GREEN@@')
     end
     task.wait(1)

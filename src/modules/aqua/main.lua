@@ -1,3 +1,4 @@
+local env = assert(getgenv, 'current executor does not support "getgenv" method.')()
 
 local aqua_service = game:FindFirstChild("Aqua")
 if not aqua_service then
@@ -23,29 +24,28 @@ if not aqua_service then
     _import_and_save('rbxassetid://12079824279', 'MaidService')
     _link_util_class_as_service('RoactService', 'Signal')
 
-    __GLOBAL__.GetAquaService = function(serviceName)
+    env.GetAquaService = function(serviceName)
         return console.assert(services[serviceName], 'service "' .. serviceName .. '" cannot be found')
     end
 end
 
 return function()
-    __GLOBAL__.__AQUA_INIT__ = true
+    env.__AQUA_INIT__ = true
 
-    __GLOBAL__.__AQUA_MAID__ = GetAquaService('MaidService').new()
-    __GLOBAL__.__AQUA_INTERNAL__ = {
+    env.__AQUA_MAID__ = GetAquaService('MaidService').new()
+    env.__AQUA_INTERNAL__ = {
         terminate = function(self)
             if __AQUA_ROACT_HANDLER__ then
                 RoactService.Roact.unmount(__AQUA_ROACT_HANDLER__)
-                __AQUA_ROACT_HANDLER__ = nil
+                env.__AQUA_ROACT_HANDLER__ = nil
             end
 
             if __AQUA_MAID__ then
                 __AQUA_MAID__:DoCleaning()
-                __AQUA_MAID__ = nil
+                env.__AQUA_MAID__ = nil
             end
         end
     }
 
-    __GLOBAL__.Aqua = import('/modules/aqua/src/ui/main.lua')
-    print(__GLOBAL__.Aqua)
+    env.Aqua = import('/modules/aqua/src/ui/main.lua')
 end

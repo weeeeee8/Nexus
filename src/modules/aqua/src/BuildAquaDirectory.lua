@@ -1,12 +1,14 @@
 local HttpService = game:GetService("HttpService")
 
+local env = assert(getgenv, 'current executor does not support "getgenv" method.')()
+
 local safe_makefolder = function(folderpath)
     local some = pcall(readfile, foldername)
     if not some then
         makefolder(folderpath)
     end
 end
-__GLOBAL__.safe_makefolder = safe_makefolder
+env.safe_makefolder = safe_makefolder
 
 local FOLDER_NAME = 'aqua'
 local CONFIGURATION_FOLDER_PATH = 'aqua/config'
