@@ -1,5 +1,3 @@
-local env = assert(getgenv, 'current executor does not support "getgenv" method.')()
-
 local aqua_service = game:FindFirstChild("Aqua")
 if not aqua_service then
     aqua_service = Instance.new("Folder")
@@ -24,7 +22,7 @@ if not aqua_service then
     _import_and_save('rbxassetid://12079824279', 'MaidService')
     _link_util_class_as_service('RoactService', 'Signal')
 
-    env.GetAquaService = function(serviceName)
+    __GLOBAL__.GetAquaService = function(serviceName)
         return console.assert(services[serviceName], 'service "' .. serviceName .. '" cannot be found')
     end
 end
