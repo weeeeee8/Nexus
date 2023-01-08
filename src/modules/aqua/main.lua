@@ -30,22 +30,23 @@ if not aqua_service then
 end
 
 return function()
-    env.__AQUA_INIT__ = true
+    __GLOBAL__.__AQUA_INIT__ = true
 
-    env.__AQUA_MAID__ = GetAquaService('MaidService').new()
-    env.__AQUA_INTERNAL__ = {
+    __GLOBAL__.__AQUA_MAID__ = GetAquaService('MaidService').new()
+    __GLOBAL__.__AQUA_INTERNAL__ = {
         terminate = function(self)
             if __AQUA_ROACT_HANDLER__ then
                 RoactService.Roact.unmount(__AQUA_ROACT_HANDLER__)
-                env.__AQUA_ROACT_HANDLER__ = nil
+                __GLOBAL__.__AQUA_ROACT_HANDLER__ = nil
             end
 
             if __AQUA_MAID__ then
                 __AQUA_MAID__:DoCleaning()
-                env.__AQUA_MAID__ = nil
+                __GLOBAL__.__AQUA_MAID__ = nil
             end
         end
     }
 
-    env.Aqua = import('/modules/aqua/src/ui/main.lua')
+    __GLOBAL__.Aqua = import('/modules/aqua/src/ui/main.lua')
+    print(__GLOBAL__, __GLOBAL__.Aqua)
 end

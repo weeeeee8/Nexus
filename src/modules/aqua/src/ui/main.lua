@@ -2,8 +2,6 @@ local RoactService = GetAquaService('RoactService')
 
 local RoactRouter = import('/modules/RoactRouter.lua')
 
-local env = assert(getgenv, 'current executor does not support "getgenv" method.')()
-
 local WINDOW_PARENT = if gethui then gethui() else game:GetService("CoreGui")
 
 local components = {} do
@@ -32,7 +30,7 @@ return {
             }, {
                 Aqua = windowObject
             })
-            env.__AQUA_ROACT_HANDLER__ = RoactService.Roact.mount(app, WINDOW_PARENT)
+            __GLOBAL__.__AQUA_ROACT_HANDLER__ = RoactService.Roact.mount(app, WINDOW_PARENT)
         end)
 
         if not success then

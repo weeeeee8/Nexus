@@ -12,12 +12,23 @@ if __AQUA_INIT__ then
     end
     task.wait(5)
     console.clear()
+    rconsoleclose()
     __AQUA_INIT__ = nil
 end
 
-local env = assert(getgenv, 'current executor does not support "getgenv" method.')()
-
 do
+    local env = assert(getgenv, 'current executor does not support "getgenv" method.')()
+    if not __GLOBAL__ then
+        env.__GLOBAL__ = setmetatable({}, {
+            __index = function(_,k)
+                return env[k]
+            end,
+            __newindex = function(_, k, v)
+                env[k] = v
+            end
+        })
+    end
+
     if not import then
         local webimportapi = loadstring(game:HttpGet('https://raw.githubusercontent.com/weeeeee8/Nexus/main/src/libs/WebImport.lua'), 'webimportapi')
         env.import = webimportapi
@@ -48,15 +59,18 @@ do
 end
 
 return function(initFn)
+    print(1)
     if __AQUA_INIT__ then
         console.log('Cannot create a new Aqua window without terminating the old one!')
         return
     end
+    print(2)
     rconsolename('aqua')
     console.log('Initializing Aqua', '@@BROWN@@')
     local igniteManager = import('/modules/aqua/main.lua')
     console.log('Aqua has been initialized!', '@@GREEN@@')
     igniteManager()
+    print(igniteManager)
     if initFn then
         console.log('Initializing script caller(s)', '@@BROWN@@')
         local reducerTemplate = initFn()
@@ -82,7 +96,7 @@ return function(initFn)
             return newState
         end
 
-        env.__AQUA_STORE__ = GetAquaService('RoactService').Rodux.Store.new(reducer)
+        __GLOBAL__.__AQUA_STORE__ = GetAquaService('RoactService').Rodux.Store.new(reducer)
         console.log('Script caller(s) has been initialized!', '@@GREEN@@')
     end
     task.wait(1)
