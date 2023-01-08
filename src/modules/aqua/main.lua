@@ -13,7 +13,7 @@ if not aqua_service then
         console.assert(service:IsA('ModuleScript'), 'service "' .. serviceName .. '" must be a module script')
         service.Name = serviceName
         service.Parent = aqua_service
-        services[serviceName] = require(service)
+        services[serviceName] = service
     end
     local function _link_util_class_as_service(serviceName, utilClassName)
         local service = console.assert(services[serviceName], 'service "' .. serviceName .. '" cannot be found')
@@ -36,7 +36,7 @@ return function()
     __GLOBAL__.__AQUA_INTERNAL__ = {
         terminate = function(self)
             if __AQUA_ROACT_HANDLER__ then
-                RoactService.Roact.unmount(__AQUA_ROACT_HANDLER__)
+                GetAquaService('MaidService').Roact.unmount(__AQUA_ROACT_HANDLER__)
                 __GLOBAL__.__AQUA_ROACT_HANDLER__ = nil
             end
 

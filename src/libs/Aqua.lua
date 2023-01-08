@@ -68,7 +68,6 @@ return function(initFn)
     local igniteManager = import('/modules/aqua/main.lua')
     console.log('Aqua has been initialized!', '@@GREEN@@')
     igniteManager()
-    print(igniteManager)
     if initFn then
         console.log('Initializing script caller(s)', '@@BROWN@@')
         local reducerTemplate = initFn()
