@@ -13,11 +13,11 @@ if not aqua_service then
         console.assert(service:IsA('ModuleScript'), 'service "' .. serviceName .. '" must be a module script')
         service.Name = serviceName
         service.Parent = aqua_service
-        services[serviceName] = service
+        services[serviceName] = require(service)
     end
     local function _link_util_class_as_service(serviceName, utilClassName)
         local service = console.assert(services[serviceName], 'service "' .. serviceName .. '" cannot be found')
-        services[utilClassName] = service[utilClassName .. 'Service']
+        services[utilClassName .. 'Service'] = service[utilClassName]
     end
 
     _import_and_save('rbxassetid://10669647943', 'RoactService')
