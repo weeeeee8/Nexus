@@ -32,9 +32,9 @@ Aqua.start(
                     Style = "Vertical",
                     Router = Router,
                 }),
-                body = Aqua.construct('Template', {
+                --[[body = Aqua.construct('Template', {
                     Router = Router,
-                })
+                })]]
             })
         })
     })

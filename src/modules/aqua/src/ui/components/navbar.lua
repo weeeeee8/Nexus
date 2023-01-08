@@ -30,12 +30,16 @@ end
 function Navbar:getAnchorListFragment()
     local anchors = {}
 
-    local router = self.props.router
+    local router = self.props.Router
+    console.assert(router, 'Navbar components need a router class!')
     for _, route in ipairs(router._routes) do
         anchors[route.title] = e(NavlinkComponent, {
+            Title = route.title,
             Icon = route.anchorInfo.Icon,
             AltText = route.anchorInfo.AltText,
             Style = self.props.Style,
+            RouterObj = router,
+            Reference = router.reference,
         })
     end
 

@@ -1,5 +1,3 @@
-local RoactService = GetAquaService('RoactService')
-
 return {
     --[=[
         Template for an aqua component
@@ -16,16 +14,22 @@ return {
         }
         ```
     ]=]
-    AquaThemeContext = RoactService.Roact.createContext({
+    AquaThemeContext = {
         Dark = {
             Background = {
                 Color = Color3.fromRBG(16, 16, 16)
+            },
+            Navlink = {
+                BackgroundDefault = Color3.fromRGB(16, 16, 16),
+                BackgroundActive = Color3.fromRGB(245, 245, 245),
             }
         },
         Light = {
             Background = {
-                Color = Color3.fromRBG(245, 245, 245)
+                Color = Color3.fromRBG(245, 245, 245),
+                BackgroundDefault = Color3.fromRGB(16, 16, 16),
+                BackgroundActive = Color3.fromRGB(245, 245, 245),
             }
         }
-    })
+    }
 }

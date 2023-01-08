@@ -47,6 +47,7 @@ do
             assert = function(condition, message)
                 if not condition then
                     console.log(message, "@@RED@@")
+                    console.log(debug.traceback(), "@@BROWN@@")
                     error('aqua internal error, please refer to the console window for information')
                 end
                 return condition
@@ -69,22 +70,29 @@ return function(initFn)
     if initFn then
         console.log('Initializing script caller(s)', '@@BROWN@@')
         local reducerTemplate = initFn()
-        if not reducerTemplate then
-            reducerTemplate = function(state, action)
-                local newState = state or {
-                    WindowShown = true,
-                    Theme = "Dark"
-                }
+        local reducer = function(state, action)
+            local newState = state or {
+                WindowShown = true,
+                Theme = "Dark",
+                ActivePageTitle = "None"
+            }
 
-                if action.type == "HideWindow" then
-                    newState.WindowShown = false
-                end
-
-                return newState
+            if action.type == "HideWindow" then
+                newState.WindowShown = false
+            elseif action.type == "ShowWindow" then
+                newState.WindowShown = true
+            elseif action.type == "UpdateActiveTitle" then
+                newState.ActivePageTitle = action.pageTitle
             end
+
+            if reducerTemplate then
+                reducerTemplate(newState, action)
+            end
+
+            return newState
         end
 
-        __GLOBAL__.__AQUA_STORE__ = GetAquaService('RoactService').Rodux.Store.new(reducerTemplate)
+        __GLOBAL__.__AQUA_STORE__ = GetAquaService('RoactService').Rodux.Store.new(reducer)
         console.log('Script caller(s) has been initialized!', '@@GREEN@@')
     end
     task.wait(1)

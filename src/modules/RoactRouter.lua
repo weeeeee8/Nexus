@@ -11,16 +11,18 @@ RoactRouter.__index = RoactRouter
 
 function RoactRouter:link(route: string, initComponent)
     local pageComponent, anchorInfo = initComponent()
-    table.insert(self._routes, {
+    local index = #self._routes+1
+    self._routes[index] = {
         title = route,
         pageComponent = pageComponent,
         anchorInfo = anchorInfo,
-    })
+        reference = index
+    }
     return self
 end
 
 function RoactRouter:goto(index: number)
-    if index > #self.ro_routesutes or index <= 0 then
+    if index > #self._routes or index <= 0 then
         console.log('route reference"' .. tostring(index) .. '" is out of bounds')
     end
     self._target = math.clamp(index, 1, #self._routes)
@@ -28,9 +30,13 @@ function RoactRouter:goto(index: number)
 end
 
 function RoactRouter:refresh()
-    local foundPage = self._routes[self._target]
-    if foundPage then
-        self.page = foundPage
+    local foundRoute = self._routes[self._target]
+    if foundRoute then
+        self.routed = foundRoute
+        __AQUA_STORE__:dispatch({
+            type = "UpdateActiveTitle",
+            pageTitle = foundRoute.title
+        })
     else
         console.log('route target does not exist (' .. self._target .. ')', '@@RED@@')
     end
@@ -41,7 +47,7 @@ function RoactRouterObject.new()
     local proxy = newproxy(true)
     local mt = getmetatable(proxy)
 
-    mt.page = nil
+    mt.routed = nil
     mt._target = 1
     mt._routes = {}
 
