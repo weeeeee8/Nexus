@@ -10,7 +10,7 @@ if not aqua_service then
     local function _import_and_save(asset, serviceName)
         console.assert(asset:find('rbxassetid://'), 'service "' .. serviceName .. '" is not a service (is considered a service when an imported asset is from the roblox marketplace, not github!)')
         local service = import(asset)
-        console.assert(asset:IsA('ModuleScript'), 'service "' .. serviceName .. '" must be a module script')
+        console.assert(service:IsA('ModuleScript'), 'service "' .. serviceName .. '" must be a module script')
         service.Name = serviceName
         service.Parent = aqua_service
         services[serviceName] = require(service)
