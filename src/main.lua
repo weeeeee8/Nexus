@@ -133,3 +133,5 @@ else
     Aqua.Console.Warn("Relaunching aqua...")
     Aqua.Console.Terminate()
 end
+
+return true
