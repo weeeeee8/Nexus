@@ -107,7 +107,7 @@ if not Aqua then
         return processFeedback()
     end
 
-    local _user = "weeeeeee8"
+    local _user = "weeeeee8"
     local _branch = "main"
     local _url = string.format("https://raw.githubusercontent.com/%s/AquaUI/%s/src/modules/import.lua", _user, _branch)
     local Import = loadstring(game:HttpGet(_url), 'AquaImport')()
