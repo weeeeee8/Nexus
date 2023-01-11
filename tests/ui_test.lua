@@ -7,5 +7,12 @@ loadstring(game:HttpGet(url), 'Aqua UI Test')()
 local UILibrary = Aqua.UI
 
 UILibrary.RenderComponent"Window"{
-    [UILibrary.Fusion.Children]
+    [UILibrary.Fusion.Children] = {
+        UILibrary.RenderComponent"Container"{
+            BackgroundColor3 = Color3.fromRGB(16, 16, 16),
+            Size = UDim2.fromOffset(300, 250),
+            Position = UDim2.fromScale(0.5, 0.5),
+            AnchorPoint = Vector2.one * 0.5
+        }
+    }
 }
