@@ -9,7 +9,7 @@ if not KRNL_LOADED then
     error("aqua framework only supports krnl at the moment")
 end
 
-local env = assert(getgenv, "current exploit executor does not have the 'getgenv' method in it's API")
+local env = assert(getgenv, "current exploit executor does not have the 'getgenv' method in it's API")()
 if not __GLOBAL__ then
     env.__GLOBAL__ = setmetatable({}, {
         __index = function(_, k) return env[k] end,
