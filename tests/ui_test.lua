@@ -7,5 +7,5 @@ loadstring(game:HttpGet(url), 'Aqua UI Test')()
 local UILibrary = Aqua.UI
 
 UILibrary.RenderComponent"Window"{
-    []
+    [UILibrary.Fusion.Children]
 }

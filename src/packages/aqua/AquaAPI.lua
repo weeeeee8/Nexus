@@ -27,10 +27,11 @@ ImportPackage("hooks")
 return {
     GetPackage = GetPackage,
     UI = setmetatable({
+        Fusion = GetPackage("Fusion"),
         RenderComponent = Aqua.Import(__AQUA_SRC_PATH__("/UI/RenderComponent.lua")),
     }, {
         __index = function(s, k)
-            return rawget(s, k) or GetPackage("Fusion")[k]
+            return rawget(s, k)
         end,
         __newindex = function(_, k)
             Aqua.Console.Warn('cannot assign property "' .. k .. '" on Aqua')
