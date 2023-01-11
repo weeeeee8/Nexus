@@ -1,4 +1,4 @@
-local user = "weeeeeee8"
+local user = "weeeeee8"
 local branch = "main"
 local url = string.format("https://raw.githubusercontent.com/%s/AquaUI/%s/src/main.lua", user, branch)
 
